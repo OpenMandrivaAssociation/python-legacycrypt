@@ -15,6 +15,10 @@ BuildArch:	noarch
 %description
 Wrapper to the POSIX crypt library call and associated functionality.
 
+%prep -a
+# Force the backend to use 'flit_core' which is the standard
+sed -i 's/flit.buildapi/flit_core.buildapi/g' pyproject.toml
+
 %files
 %{py_sitedir}/legacycrypt.py
 %{py_sitedir}/legacycrypt-*.*-info
