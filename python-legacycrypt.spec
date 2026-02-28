@@ -1,6 +1,6 @@
 Name:		python-legacycrypt
 Version:	0.3
-Release:	1
+Release:	2
 Source0:	https://files.pythonhosted.org/packages/source/l/legacycrypt/legacycrypt-%{version}.tar.gz
 Summary:	Wrapper to the POSIX crypt library call and associated functionality.
 URL:		https://pypi.org/project/legacycrypt/
@@ -9,6 +9,7 @@ Group:		Development/Python
 BuildRequires:	python
 BuildRequires:	python%{pyver}dist(flit)
 BuildRequires:	python%{pyver}dist(flit-core)
+Provides:	python%{pyver}dist(crypt)
 BuildSystem:	python
 BuildArch:	noarch
 
@@ -19,7 +20,13 @@ Wrapper to the POSIX crypt library call and associated functionality.
 # Force the backend to use 'flit_core' which is the standard
 sed -i 's/flit.buildapi/flit_core.buildapi/g' pyproject.toml
 
+%install -a
+# Make "import crypt" great again
+cd %{buildroot}%{py_sitedir}
+ln -s legacycrypt.py crypt.py
+
 %files
+%{py_sitedir}/crypt.py
 %{py_sitedir}/legacycrypt.py
 %{py_sitedir}/legacycrypt-*.*-info
 %{py_sitedir}/__pycache__/*
