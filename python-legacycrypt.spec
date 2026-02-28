@@ -8,6 +8,7 @@ License:	GPL
 Group:		Development/Python
 BuildRequires:	python
 BuildRequires:	python%{pyver}dist(flit)
+BuildRequires:	python%{pyver}dist(flit-core)
 BuildSystem:	python
 BuildArch:	noarch
 
