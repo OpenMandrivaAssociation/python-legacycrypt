@@ -7,8 +7,8 @@ URL:		https://pypi.org/project/legacycrypt/
 License:	GPL
 Group:		Development/Python
 BuildRequires:	python
-BuildRequires:	python%{pyver}dist(flit)
 BuildRequires:	python%{pyver}dist(flit-core)
+BuildRequires:	python%{pyver}dist(pip)
 Provides:	python%{pyver}dist(crypt)
 BuildSystem:	python
 BuildArch:	noarch
@@ -17,8 +17,31 @@ BuildArch:	noarch
 Wrapper to the POSIX crypt library call and associated functionality.
 
 %prep -a
-# Force the backend to use 'flit_core' which is the standard
-sed -i 's/flit.buildapi/flit_core.buildapi/g' pyproject.toml
+# flit 4 no longer reads [tool.flit.metadata].
+cat > pyproject.toml << 'EOF'
+[build-system]
+requires = ["flit_core >=3.2"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "legacycrypt"
+description = "Wrapper to the POSIX crypt library call and associated functionality."
+readme = "README.md"
+requires-python = ">=3.5"
+license = "PSF-2.0"
+authors = [{name = "Christian Heimes", email = "christian@python.org"}]
+dynamic = ["version"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Programming Language :: Python :: 3 :: Only",
+    "License :: OSI Approved :: Python Software Foundation License",
+    "Operating System :: POSIX",
+    "Topic :: Security :: Cryptography",
+]
+
+[tool.flit.module]
+name = "legacycrypt"
+EOF
 
 %install -a
 # Make "import crypt" great again
