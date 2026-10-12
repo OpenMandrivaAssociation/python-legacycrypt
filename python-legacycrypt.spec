@@ -34,7 +34,6 @@ dynamic = ["version"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Programming Language :: Python :: 3 :: Only",
-    "License :: OSI Approved :: Python Software Foundation License",
     "Operating System :: POSIX",
     "Topic :: Security :: Cryptography",
 ]
