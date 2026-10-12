@@ -1,6 +1,6 @@
 Name:		python-legacycrypt
 Version:	0.3
-Release:	2
+Release:	3
 Source0:	https://files.pythonhosted.org/packages/source/l/legacycrypt/legacycrypt-%{version}.tar.gz
 Summary:	Wrapper to the POSIX crypt library call and associated functionality.
 URL:		https://pypi.org/project/legacycrypt/
